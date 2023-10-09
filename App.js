@@ -12,6 +12,8 @@ import MealDetails from "./screens/MealDetails";
 import { Colors } from "./constants/colors";
 import IconButton from "./components/UI/IconButton";
 import Icon from "./components/UI/Icon";
+import { useEffect } from "react";
+import { init } from "./util/database";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,7 +28,7 @@ function MealsOverview() {
         tabBarActiveBackgroundColor: Colors.primary200,
         tabBarShowLabel: false,
         headerStyle: { backgroundColor: Colors.primary100 },
-        cardStyle: { backgroundColor: 'gray'},
+        cardStyle: { backgroundColor: "gray" },
         headerRight: ({ tintColor }) => (
           <IconButton
             icon="add"
@@ -44,16 +46,17 @@ function MealsOverview() {
         component={Recommender}
         options={{
           tabBarIcon: () => (
-            <Icon icon="dice-6" size={30} color={Colors.icons} set="m"/>
+            <Icon icon="dice-6" size={30} color={Colors.icons} set="m" />
           ),
         }}
       />
       <Tab.Screen
         name="AllMeals"
-        component={AllMeals}cook
+        component={AllMeals}
+        cook
         options={{
           tabBarIcon: () => (
-            <Icon icon="fast-food" size={30} color={Colors.icons} set="i"/>
+            <Icon icon="fast-food" size={30} color={Colors.icons} set="i" />
           ),
         }}
       />
@@ -80,6 +83,21 @@ function MealsOverview() {
 }
 
 export default function App() {
+  const [dbInitialized, setDbInitialized] = useState(false);
+  useEffect(() => {
+    init()
+      .then(() => {
+        setDbInitialized(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  if (!dbInitialized) {
+    return 
+  }
+
   return (
     <>
       <StatusBar style="auto" />
