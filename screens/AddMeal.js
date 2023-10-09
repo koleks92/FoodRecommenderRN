@@ -1,13 +1,15 @@
 // Add new meal to the database
 
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet} from "react-native";
+import { Colors } from "../constants/colors";
+import MealForm from "../components/AddMeal/MealForm";
 
 function AddMeals() {
   return (
-    <View>
-      <Text>Add new meal</Text>
-    </View>
+    <MealForm />
   );
 }
 
 export default AddMeals;
+
+

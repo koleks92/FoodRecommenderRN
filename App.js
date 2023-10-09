@@ -49,7 +49,7 @@ function MealsOverview() {
         options={{
           tabBarIcon: () => (
             <Icon icon="dice-6" size={30} color={Colors.icons} set="m" />
-          ),
+          ),        
         }}
       />
       <Tab.Screen
