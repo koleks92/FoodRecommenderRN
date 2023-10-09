@@ -12,7 +12,7 @@ import MealDetails from "./screens/MealDetails";
 import { Colors } from "./constants/colors";
 import IconButton from "./components/UI/IconButton";
 import Icon from "./components/UI/Icon";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { init } from "./util/database";
 
 const Stack = createNativeStackNavigator();
