@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -12,11 +12,13 @@ import MealDetails from "./screens/MealDetails";
 import { Colors } from "./constants/colors";
 import IconButton from "./components/UI/IconButton";
 import Icon from "./components/UI/Icon";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { init } from "./util/database";
+import * as SplashScreen from "expo-splash-screen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
 
 function MealsOverview() {
   return (
@@ -83,25 +85,38 @@ function MealsOverview() {
 }
 
 export default function App() {
-  const [dbInitialized, setDbInitialized] = useState(false);
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  // Splash screen
   useEffect(() => {
-    init()
-      .then(() => {
-        setDbInitialized(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        // Pre-load database
+        init();
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+    prepare();
   }, []);
 
-  if (!dbInitialized) {
-    return 
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
   }
 
   return (
     <>
       <StatusBar style="auto" />
-      <NavigationContainer>
+      <NavigationContainer onReady={onLayoutRootView}>
         <Stack.Navigator
           screenOptions={{
             headerStyle: { backgroundColor: Colors.primary100 },
