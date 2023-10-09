@@ -1,7 +1,8 @@
 // CONSTANTS COLORS
 
 export const Colors = {
-    primary100: '#34A853', // Deep green (background)
+    primary50: '#34A853',
+    primary100: '#2b9e49', // Deep green (background)
     primary200: '#21923f', // Darker green (navbar)
     buttons: '#FF4136', // Tomato Red (accents, buttons)
     text: '#FFFFFF', // White
