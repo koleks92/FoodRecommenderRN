@@ -20,10 +20,11 @@ export default Button;
 
 const styles = StyleSheet.create({
     button: {
+        flex: 1,
         borderRadius: 4,
         padding: 8,
         backgroundColor: Colors.primary100,
-        elevation: 4
+        elevation: 4,
     },
     pressed: {
         opacity: 0.5,
