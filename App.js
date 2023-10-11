@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { ImageBackground } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -18,7 +18,6 @@ import * as SplashScreen from "expo-splash-screen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
 
 function MealsOverview() {
   return (
@@ -49,7 +48,8 @@ function MealsOverview() {
         options={{
           tabBarIcon: () => (
             <Icon icon="dice-6" size={30} color={Colors.icons} set="m" />
-          ),        
+          ),
+          cardStyle: { backgroundColor: "#111111" },
         }}
       />
       <Tab.Screen
@@ -134,5 +134,3 @@ export default function App() {
     </>
   );
 }
-
-const styles = StyleSheet.create({});
