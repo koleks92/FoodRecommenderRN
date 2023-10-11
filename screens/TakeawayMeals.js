@@ -1,12 +1,15 @@
 // Shows all takeaway meals
 
 import { View, Text } from "react-native";
+import Background from "../components/UI/Background";
 
 function TakeawayMeals() {
   return (
-    <View>
-      <Text>Takeaway Meals !</Text>
-    </View>
+    <Background>
+      <View>
+        <Text>Takeaway Meals !</Text>
+      </View>
+    </Background>
   );
 }
 

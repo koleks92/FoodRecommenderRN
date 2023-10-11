@@ -1,12 +1,15 @@
 // Shows all avalilable meals
 
 import { View, Text } from "react-native";
+import Background from "../components/UI/Background";
 
 function AllMeals() {
   return (
-    <View>
-      <Text>All Meals !</Text>
-    </View>
+    <Background>
+      <View>
+        <Text>All Meals !</Text>
+      </View>
+    </Background>
   );
 }
 
