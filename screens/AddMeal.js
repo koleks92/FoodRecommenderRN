@@ -1,14 +1,23 @@
 // Add new meal to the database
 
-import MealForm from "../components/AddMeal/MealForm";
+import { StyleSheet, View } from "react-native";
+import ChoiceForm from "../components/AddMeal/ChoiceForm";
 import Background from "../components/UI/Background";
 
 function AddMeals() {
   return (
     <Background>
-      <MealForm />
+      <View style={styles.container}>
+        <ChoiceForm />
+      </View>
     </Background>
   );
 }
 
 export default AddMeals;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  }
+})

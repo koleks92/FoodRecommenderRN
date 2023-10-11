@@ -50,14 +50,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   buttonContainer: {
-    width: "100%",
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: "2%"
+    margin: "5%"
   },
   button: {
-    width: "100%",
     alignItems: 'center',
     justifyContent: 'center',
   },
