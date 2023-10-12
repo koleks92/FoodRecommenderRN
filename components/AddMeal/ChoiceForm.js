@@ -20,24 +20,20 @@ function MealForm() {
 
   return (
     <View style={styles.root}>
-      <View style={styles.buttonContainer}>
         <Button
-          style={styles.button}
+          buttonStyle={styles.button}
           textStyle={styles.buttonText}
           onPress={choiceTakeawayHandler}
         >
           Takeaway
         </Button>
-      </View>
-      <View style={styles.buttonContainer}>
         <Button
-          style={styles.button}
+          buttonStyle={styles.button}
           textStyle={styles.buttonText}
           onPress={choiceHomeHandler}
         >
           Make at home
         </Button>
-      </View>
     </View>
   );
 }
@@ -46,20 +42,16 @@ export default MealForm;
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
-    justifyContent: 'space-evenly',
-  },
-  buttonContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: "5%"
+    flexDirection: 'row',
+    minHeight: "25%"
   },
   button: {
-    alignItems: 'center',
+    margin: 10,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
-    fontSize: 28,
-  },
+    fontSize: 26,
+    fontWeight: 'bold'
+  }
 });
