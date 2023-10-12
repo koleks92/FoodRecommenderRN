@@ -14,10 +14,6 @@ function AddMeals() {
     setChoice(data);
   }
 
-  useEffect(() => {
-    console.log(choice);
-  }, [choice]);
-
   let ScreenView;
   
   if (choice === '') {
