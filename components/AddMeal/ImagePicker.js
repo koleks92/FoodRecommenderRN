@@ -14,12 +14,16 @@ function ImagePicker({ onImageTaken }) {
   const [cameraPhoto, setCameraPhoto] = useState();
 
   async function verifyPermissions() {
-    if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
+    console.log(cameraPermissionInformation.status);
+
+    if (
+      cameraPermissionInformation.status === PermissionStatus.UNDETERMINED ||
+      cameraPermissionInformation.status === PermissionStatus.DENIED
+    ) {
       const permissionResponse = await requestPermission();
 
       return permissionResponse.granted;
     }
-
     if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
       Alert.alert(
         "Insufficient Permissions!",
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.primary200,
     borderRadius: 4,
-    elevation: 4
+    elevation: 4,
   },
   image: {
     width: "100%",
@@ -92,7 +96,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
   },
 });
