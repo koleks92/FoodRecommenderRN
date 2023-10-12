@@ -85,15 +85,20 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary200,
     borderRadius: 4,
     elevation: 4,
+    borderWidth: 1,
   },
   image: {
     width: "100%",
     height: "100%",
+    borderWidth: 1,
+    borderRadius: 4,
+
   },
   button: {
     marginVertical: 8,
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 1,
   },
   buttonText: {
     fontSize: 16,
