@@ -28,6 +28,9 @@ function HomeForm() {
               search="true"
               buttonStyle={styles.buttonDropdown}
               buttonTextStyle={styles.buttonDropdownTextStyle}
+              dropdownStyle={styles.dropdownStyle}
+              rowStyle={styles.rowStyle}
+              rowTextStyle={styles.rowTextStyle}
             />
           </View>
           <View style={styles.dropdownContainer}>
@@ -37,6 +40,8 @@ function HomeForm() {
               buttonStyle={styles.buttonDropdown}
               buttonTextStyle={styles.buttonDropdownTextStyle}
               dropdownStyle={styles.dropdownStyle}
+              rowStyle={styles.rowStyle}
+              rowTextStyle={styles.rowTextStyle}
             />
           </View>
         </View>
@@ -114,5 +119,16 @@ const styles = StyleSheet.create({
   buttonDropdownTextStyle: {
     color: Colors.text,
     fontSize: 16,
+  },
+  dropdownStyle: {
+    backgroundColor: Colors.background,
+    borderRadius: 4
+  },
+  rowStyle: {
+    borderBottomColor: 'black'
+  },
+  rowTextStyle: {
+    color: Colors.text,
+    fontSize: 15,
   },
 });
