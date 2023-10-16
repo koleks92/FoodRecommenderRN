@@ -4,9 +4,11 @@ import { cusine, price } from "../../constants/addmeal";
 import { Colors } from "../../constants/colors";
 import ImagePicker from "./ImagePicker";
 import { useState } from "react";
+import { Dropdown } from "react-native-element-dropdown";
 
 function HomeForm() {
   const [selectedImage, setSelectedImage] = useState();
+
 
   function imageHandler() {
     setSelectedImage(image);
@@ -47,10 +49,7 @@ function HomeForm() {
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Description </Text>
-          <TextInput
-            style={styles.inputStyle}
-            multiline
-          />
+          <TextInput style={styles.inputStyle} multiline />
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Recipe</Text>
@@ -89,6 +88,7 @@ const styles = StyleSheet.create({
     maxWidth: "48%",
     flexDirection: "column",
     justifyContent: "space-between",
+    elevation: 4,
   },
   labelText: {
     color: Colors.text,
@@ -103,11 +103,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: Colors.primary200,
     fontSize: 16,
+    elevation: 4,
   },
   multilineStyle: {
-    textAlignVertical: 'top',
+    textAlignVertical: "top",
     paddingVertical: 8,
-    height: 144 
+    height: 144,
   },
   buttonDropdown: {
     backgroundColor: Colors.primary200,
@@ -121,11 +122,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   dropdownStyle: {
+    position: 'absolute',
     backgroundColor: Colors.background,
-    borderRadius: 4
+    borderRadius: 4,
   },
   rowStyle: {
-    borderBottomColor: 'black'
+    borderBottomColor: "black",
   },
   rowTextStyle: {
     color: Colors.text,
