@@ -38,13 +38,54 @@ export function insertMeal(meal) {
     database.transaction((tx) => {
       tx.executeSql(
         `INSERT INTO meals (title, type, imageUri, cusine, restaurant, price, description, recipe) VALUES (?, ?, ?, ?, ?, ?, ? ,?)`,
-        [meal.title, meal.type, meal.imageUri, meal.cuisne, meal.restaurant, meal.price, meal.description, meal.recipe ],
+        [
+          meal.title,
+          meal.type,
+          meal.imageUri,
+          meal.cuisne,
+          meal.restaurant,
+          meal.price,
+          meal.description,
+          meal.recipe,
+        ],
         (_, result) => {
           console.log(result);
-          resolve(result)
+          resolve(result);
         },
         (_, error) => {
-          reject(error)
+          reject(error);
+        }
+      );
+    });
+  });
+}
+
+export function fetchAllMeals() {
+  return new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM meals",
+        [],
+        (_, result) => {
+          const meals = [];
+          for (const meal of result.rows._array) {
+            meals.push(
+              new Meal(
+                meal.title,
+                meal.type,
+                meal.imageUri,
+                meal.cuisne,
+                meal.restaurant,
+                meal.price,
+                meal.description,
+                meal.recipe
+              )
+            );
+          }
+          resolve(meals);
+        },
+        (_, error) => {
+          reject(error);
         }
       );
     });

@@ -3,6 +3,7 @@
 import { View, Text } from "react-native";
 import Background from "../components/UI/Background";
 
+
 function HomeMeals() {
   return (
     <Background>
