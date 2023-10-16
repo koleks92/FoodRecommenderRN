@@ -1,12 +1,11 @@
 import { ScrollView, StyleSheet, Text, View, TextInput } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
-import { cusine, price } from "../../constants/addmeal";
+import { cusine, price } from "../../constants/meals";
 import { Colors } from "../../constants/colors";
 import ImagePicker from "./ImagePicker";
 import { useState } from "react";
 import Button from "../UI/Button";
 import { Meal } from "../../models/meal";
-
 
 function TakeawayForm({ onSaveMeal }) {
   const [titleMeal, setTitleMeal] = useState("");
@@ -42,7 +41,7 @@ function TakeawayForm({ onSaveMeal }) {
 
   function saveHandler() {
     if (selectedImage === "") {
-      setSelectedImage(null)
+      setSelectedImage(null);
     }
 
     const data = new Meal(
@@ -53,9 +52,9 @@ function TakeawayForm({ onSaveMeal }) {
       restuarantMeal,
       priceMeal,
       descriptionMeal,
-      null,
+      null
     );
-    
+
     console.log(data.id);
     onSaveMeal(data);
   }

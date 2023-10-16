@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, Text, View, TextInput } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
-import { cusine, price } from "../../constants/addmeal";
+import { cusine, price } from "../../constants/meals";
 import { Colors } from "../../constants/colors";
 import ImagePicker from "./ImagePicker";
 import { useState } from "react";
@@ -41,7 +41,7 @@ function HomeForm({ onSaveMeal }) {
 
   function saveHandler() {
     if (selectedImage === "") {
-      setSelectedImage(null)
+      setSelectedImage(null);
     }
 
     const data = new Meal(
@@ -52,9 +52,9 @@ function HomeForm({ onSaveMeal }) {
       null,
       priceMeal,
       descriptionMeal,
-      recipeMeal,
+      recipeMeal
     );
-    
+
     console.log(data.id);
     onSaveMeal(data);
   }
