@@ -60,6 +60,7 @@ function HomeForm({ onSaveMeal }) {
   }
 
   return (
+
     <View style={styles.root}>
       <ScrollView>
         <View style={styles.inputContainer}>
@@ -82,6 +83,7 @@ function HomeForm({ onSaveMeal }) {
               dropdownStyle={styles.dropdownStyle}
               rowStyle={styles.rowStyle}
               rowTextStyle={styles.rowTextStyle}
+              statusBarTranslucent={true}
               onSelect={(selectedItem) => cusineHandler(selectedItem)}
             />
           </View>
@@ -94,6 +96,7 @@ function HomeForm({ onSaveMeal }) {
               dropdownStyle={styles.dropdownStyle}
               rowStyle={styles.rowStyle}
               rowTextStyle={styles.rowTextStyle}
+              statusBarTranslucent={true}
               onSelect={(selectedItem) => priceHandler(selectedItem)}
             />
           </View>
@@ -129,6 +132,7 @@ function HomeForm({ onSaveMeal }) {
         </View>
       </ScrollView>
     </View>
+
   );
 }
 

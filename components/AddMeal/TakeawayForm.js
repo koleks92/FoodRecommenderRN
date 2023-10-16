@@ -81,6 +81,7 @@ function TakeawayForm({ onSaveMeal }) {
               dropdownStyle={styles.dropdownStyle}
               rowStyle={styles.rowStyle}
               rowTextStyle={styles.rowTextStyle}
+              statusBarTranslucent={true}
               onSelect={(selectedItem) => cusineHandler(selectedItem)}
             />
           </View>
@@ -93,6 +94,7 @@ function TakeawayForm({ onSaveMeal }) {
               dropdownStyle={styles.dropdownStyle}
               rowStyle={styles.rowStyle}
               rowTextStyle={styles.rowTextStyle}
+              statusBarTranslucent={true}
               onSelect={(selectedItem) => priceHandler(selectedItem)}
             />
           </View>
