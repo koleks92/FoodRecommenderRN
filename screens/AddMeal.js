@@ -6,12 +6,14 @@ import Background from "../components/UI/Background";
 import { useState, useEffect } from "react";
 import HomeForm from "../components/AddMeal/HomeForm";
 import TakeawayForm from "../components/AddMeal/TakeawayForm";
+import { insertMeal } from "../util/database";
 
-function AddMeals() {
+function AddMeals({ navigation }) {
   const [choice, setChoice] = useState("");
 
-  function saveMealHandler(data) {
-    console.log(data);
+  async function saveMealHandler(data) {
+    await insertMeal(data);
+    navigation.navigate('AllMeals')
   }
 
   function handleChoiceData(data) {
