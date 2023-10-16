@@ -4,15 +4,37 @@ import { cusine, price } from "../../constants/addmeal";
 import { Colors } from "../../constants/colors";
 import ImagePicker from "./ImagePicker";
 import { useState } from "react";
-import { Dropdown } from "react-native-element-dropdown";
 
 function HomeForm() {
+  const [titleMeal, setTitleMeal] = useState("");
+  const [cusineMeal, setCusineMeal] = useState("");
+  const [priceMeal, setPriceMeal] = useState("");
+  const [descriptionMeal, setDescriptionMeal] = useState("");
+  const [recipeMeal, setRecipeMeal] = useState("");
   const [selectedImage, setSelectedImage] = useState();
-
 
   function imageHandler() {
     setSelectedImage(image);
-    console.log("IMAGE");
+  };
+
+  function titleHandler(enteredText) {
+    setTitleMeal(enteredText);
+  };
+
+  function cusineHandler(enteredText) {
+    setCusineMeal(enteredText);
+  };
+
+  function priceHandler(enteredText) {
+    setPriceMeal(enteredText);
+  };
+
+  function descriptionHandler(enteredText) {
+    setDescriptionMeal(enteredText);
+  };
+
+  function recipeHandler(enteredText) {
+    setRecipeMeal(enteredText);
   }
 
   return (
@@ -20,7 +42,12 @@ function HomeForm() {
       <ScrollView>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}> Title </Text>
-          <TextInput style={styles.inputStyle} autoCorrect={false} />
+          <TextInput
+            style={styles.inputStyle}
+            autoCorrect={false}
+            onChangeText={titleHandler}
+            value={titleMeal}
+          />
         </View>
         <View style={styles.dropdownsContainer}>
           <View style={styles.dropdownContainer}>
@@ -33,6 +60,7 @@ function HomeForm() {
               dropdownStyle={styles.dropdownStyle}
               rowStyle={styles.rowStyle}
               rowTextStyle={styles.rowTextStyle}
+              onSelect={(selectedItem) => cusineHandler(selectedItem)}
             />
           </View>
           <View style={styles.dropdownContainer}>
@@ -44,23 +72,24 @@ function HomeForm() {
               dropdownStyle={styles.dropdownStyle}
               rowStyle={styles.rowStyle}
               rowTextStyle={styles.rowTextStyle}
+              onSelect={(selectedItem) => priceHandler(selectedItem)}
             />
           </View>
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Description </Text>
-          <TextInput style={styles.inputStyle} multiline />
+          <TextInput style={styles.inputStyle} multiline onChangeText={descriptionHandler} />
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Recipe</Text>
           <TextInput
             style={[styles.inputStyle, styles.multilineStyle]}
             multiline
+            onChangeText={recipeHandler}
           />
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Image</Text>
-
           <ImagePicker onImageTaken={imageHandler} />
         </View>
       </ScrollView>
@@ -122,7 +151,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   dropdownStyle: {
-    position: 'absolute',
+    position: "absolute",
     backgroundColor: Colors.background,
     borderRadius: 4,
   },
