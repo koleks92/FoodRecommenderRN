@@ -1,7 +1,6 @@
 // MEAL CLASS MODEL
 export class Meal {
   constructor(
-    id,
     title,
     type,
     imageUri = false,
@@ -9,7 +8,8 @@ export class Meal {
     restaurant = false,
     price = false,
     description = false,
-    recipe = false
+    recipe = false,
+    id,
   ) {
     this.id = id;
     this.title = title;

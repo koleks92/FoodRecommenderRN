@@ -4,6 +4,8 @@ import { cusine, price } from "../../constants/addmeal";
 import { Colors } from "../../constants/colors";
 import ImagePicker from "./ImagePicker";
 import { useState } from "react";
+import Button from "../UI/Button";
+import { Meal } from "../../models/meal";
 
 function HomeForm() {
   const [titleMeal, setTitleMeal] = useState("");
@@ -11,30 +13,49 @@ function HomeForm() {
   const [priceMeal, setPriceMeal] = useState("");
   const [descriptionMeal, setDescriptionMeal] = useState("");
   const [recipeMeal, setRecipeMeal] = useState("");
-  const [selectedImage, setSelectedImage] = useState();
+  const [selectedImage, setSelectedImage] = useState("");
 
-  function imageHandler() {
-    setSelectedImage(image);
-  };
+  function imageHandler(image) {
+    setSelectedImage(image.uri);
+  }
 
   function titleHandler(enteredText) {
     setTitleMeal(enteredText);
-  };
+  }
 
   function cusineHandler(enteredText) {
     setCusineMeal(enteredText);
-  };
+  }
 
   function priceHandler(enteredText) {
     setPriceMeal(enteredText);
-  };
+  }
 
   function descriptionHandler(enteredText) {
     setDescriptionMeal(enteredText);
-  };
+  }
 
   function recipeHandler(enteredText) {
     setRecipeMeal(enteredText);
+  }
+
+  function saveHandler() {
+    if (selectedImage === "") {
+      setSelectedImage(null)
+    }
+
+    const data = new Meal(
+      titleMeal,
+      "home",
+      selectedImage,
+      cusineMeal,
+      null,
+      priceMeal,
+      descriptionMeal,
+      recipeMeal,
+    );
+
+    console.log(data.id)
   }
 
   return (
@@ -78,7 +99,11 @@ function HomeForm() {
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Description </Text>
-          <TextInput style={styles.inputStyle} multiline onChangeText={descriptionHandler} />
+          <TextInput
+            style={styles.inputStyle}
+            multiline
+            onChangeText={descriptionHandler}
+          />
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Recipe</Text>
@@ -91,6 +116,15 @@ function HomeForm() {
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Image</Text>
           <ImagePicker onImageTaken={imageHandler} />
+        </View>
+        <View style={styles.inputContainer}>
+          <Button
+            onPress={saveHandler}
+            buttonStyle={styles.saveButton}
+            textStyle={styles.saveText}
+          >
+            Save
+          </Button>
         </View>
       </ScrollView>
     </View>
@@ -161,5 +195,18 @@ const styles = StyleSheet.create({
   rowTextStyle: {
     color: Colors.text,
     fontSize: 15,
+  },
+  saveButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    elevation: 4,
+    backgroundColor: Colors.primary300,
+    maxWidth: "25%",
+    marginHorizontal: "37.5%",
+  },
+  saveText: {
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });

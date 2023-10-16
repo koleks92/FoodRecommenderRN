@@ -99,9 +99,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
+    backgroundColor: Colors.primary200
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
   },
 });
