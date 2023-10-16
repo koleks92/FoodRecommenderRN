@@ -18,7 +18,6 @@ function AllMeals() {
 
     if (isFocused) {
       loadAllMeals();
-      console.log(loadedMeals);
     }
   }, [isFocused]);
 

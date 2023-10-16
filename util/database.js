@@ -91,3 +91,35 @@ export function fetchAllMeals() {
     });
   });
 }
+
+export function fetchMeals(typeOfMeal) {
+  return new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM meals WHERE type = ?",
+        [typeOfMeal],
+        (_, result) => {
+          const meals = [];
+          for (const meal of result.rows._array) {
+            meals.push(
+              new Meal(
+                meal.title,
+                meal.type,
+                meal.imageUri,
+                meal.cuisne,
+                meal.restaurant,
+                meal.price,
+                meal.description,
+                meal.recipe
+              )
+            );
+          }
+          resolve(meals);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+}
