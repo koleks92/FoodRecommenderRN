@@ -15,7 +15,7 @@ export function init() {
                 imageUri TEXT,
                 cusine TEXT,
                 restaurant TEXT,
-                price REAL,
+                price TEXT,
                 description TEXT,
                 recipe TEXT
             )`,
