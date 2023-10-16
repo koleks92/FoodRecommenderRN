@@ -7,7 +7,7 @@ import { useState } from "react";
 import Button from "../UI/Button";
 import { Meal } from "../../models/meal";
 
-function HomeForm() {
+function HomeForm({ onSaveMeal }) {
   const [titleMeal, setTitleMeal] = useState("");
   const [cusineMeal, setCusineMeal] = useState("");
   const [priceMeal, setPriceMeal] = useState("");
@@ -54,8 +54,9 @@ function HomeForm() {
       descriptionMeal,
       recipeMeal,
     );
-
-    console.log(data.id)
+    
+    console.log(data.id);
+    onSaveMeal(data);
   }
 
   return (
