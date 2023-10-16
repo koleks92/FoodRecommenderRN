@@ -4,13 +4,60 @@ import { cusine, price } from "../../constants/addmeal";
 import { Colors } from "../../constants/colors";
 import ImagePicker from "./ImagePicker";
 import { useState } from "react";
+import Button from "../UI/Button";
+import { Meal } from "../../models/meal";
 
-function TakeawayForm() {
-  const [selectedImage, setSelectedImage] = useState();
 
-  function imageHandler() {
+function TakeawayForm({ onSaveMeal }) {
+  const [titleMeal, setTitleMeal] = useState("");
+  const [cusineMeal, setCusineMeal] = useState("");
+  const [priceMeal, setPriceMeal] = useState("");
+  const [descriptionMeal, setDescriptionMeal] = useState("");
+  const [restuarantMeal, setRestaurantMeal] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
+
+  function imageHandler(image) {
     setSelectedImage(image);
-    console.log("IMAGE");
+  }
+
+  function titleHandler(enteredText) {
+    setTitleMeal(enteredText);
+  }
+
+  function cusineHandler(enteredText) {
+    setCusineMeal(enteredText);
+  }
+
+  function priceHandler(enteredText) {
+    setPriceMeal(enteredText);
+  }
+
+  function descriptionHandler(enteredText) {
+    setDescriptionMeal(enteredText);
+  }
+
+  function restaurantHandler(enteredText) {
+    setRestaurantMeal(enteredText);
+  }
+
+  function saveHandler() {
+    if (selectedImage === "") {
+      setSelectedImage(null)
+    }
+
+    const data = new Meal(
+      titleMeal,
+      "takeaway",
+      selectedImage,
+      cusineMeal,
+      restuarantMeal,
+      priceMeal,
+      descriptionMeal,
+      null,
+    );
+    
+    console.log(data.id);
+    onSaveMeal(data);
   }
 
   return (
@@ -18,7 +65,11 @@ function TakeawayForm() {
       <ScrollView>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}> Title </Text>
-          <TextInput style={styles.inputStyle} autoCorrect={false} />
+          <TextInput
+            style={styles.inputStyle}
+            autoCorrect={false}
+            onChangeText={titleHandler}
+          />
         </View>
         <View style={styles.dropdownsContainer}>
           <View style={styles.dropdownContainer}>
@@ -31,6 +82,7 @@ function TakeawayForm() {
               dropdownStyle={styles.dropdownStyle}
               rowStyle={styles.rowStyle}
               rowTextStyle={styles.rowTextStyle}
+              onSelect={(selectedItem) => cusineHandler(selectedItem)}
             />
           </View>
           <View style={styles.dropdownContainer}>
@@ -42,20 +94,37 @@ function TakeawayForm() {
               dropdownStyle={styles.dropdownStyle}
               rowStyle={styles.rowStyle}
               rowTextStyle={styles.rowTextStyle}
+              onSelect={(selectedItem) => priceHandler(selectedItem)}
             />
           </View>
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Description </Text>
-          <TextInput style={styles.inputStyle} multiline />
+          <TextInput
+            style={styles.inputStyle}
+            multiline
+            onChangeText={descriptionHandler}
+          />
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Restaurant </Text>
-          <TextInput style={styles.inputStyle} />
+          <TextInput
+            style={styles.inputStyle}
+            onChangeText={restaurantHandler}
+          />
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Image</Text>
           <ImagePicker onImageTaken={imageHandler} />
+        </View>
+        <View style={styles.inputContainer}>
+          <Button
+            onPress={saveHandler}
+            buttonStyle={styles.saveButton}
+            textStyle={styles.saveText}
+          >
+            Save
+          </Button>
         </View>
       </ScrollView>
     </View>
@@ -115,14 +184,26 @@ const styles = StyleSheet.create({
   },
   dropdownStyle: {
     backgroundColor: Colors.background,
-    borderRadius: 4
+    borderRadius: 4,
   },
   rowStyle: {
-    borderBottomColor: 'black'
+    borderBottomColor: "black",
   },
   rowTextStyle: {
     color: Colors.text,
     fontSize: 15,
   },
-
+  saveButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    elevation: 4,
+    backgroundColor: Colors.primary300,
+    maxWidth: "25%",
+    marginHorizontal: "37.5%",
+  },
+  saveText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });
