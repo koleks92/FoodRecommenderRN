@@ -15,7 +15,12 @@ function MealItem({ data, onPress }) {
     image = <Image style={styles.image} source={{ uri: data.imageUri }} />;
   }
 
-  console.log(imageUri);
+  let type;
+  if (data.type === "home") {
+    type = "Make-at-home";
+  } else {
+    type = "Takeaway";
+  }
 
   return (
     <Pressable
@@ -24,7 +29,10 @@ function MealItem({ data, onPress }) {
     >
       {image}
       <View style={styles.infoContainer}>
-        <Text style={styles.title}>{data.title}</Text>
+        <View style={styles.titleTypeContainer}>
+          <Text style={styles.title}>{data.title}</Text>
+          <Text style={styles.type}>{type}</Text>
+        </View>
         <View style={styles.cusinePriceContainer}>
           <Text style={styles.cpText}>{data.cusine}</Text>
           <Text style={styles.cpText}>{data.price}</Text>
@@ -40,8 +48,7 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
     alignItems: "flex-start",
-    marginHorizontal: 12,
-    marginVertical: 8,
+    marginBottom: 8,
     backgroundColor: Colors.primary100,
     borderRadius: 6,
     overflow: "hidden",
@@ -57,19 +64,23 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 12,
   },
+  titleTypeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: Colors.text
+    fontWeight: "bold",
+    color: Colors.text,
   },
   cusinePriceContainer: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'space-between'
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
   },
   cpText: {
-    fontSize: 16,
-    fontStyle: 'italic'
-  }
+    fontSize: 14,
+    fontStyle: "italic",
+  },
 });

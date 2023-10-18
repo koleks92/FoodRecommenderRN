@@ -33,7 +33,10 @@ function MealList({ meals }) {
 export default MealList;
 
 const styles = StyleSheet.create({
-  list: {},
+  list: {
+    flex: 1,
+    margin: 8,
+  },
   fallbackContainer: {},
   fallbackText: {}
 });
