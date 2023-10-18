@@ -21,11 +21,10 @@ function MealDetails({ route, navigation }) {
   }
 
   function remove() {
-    Alert.alert('Remove Meal',
+    Alert.alert(`Remove ${loadedMeal.title}`,
     'Are you sure that you want to remove this meal ?',
     [{text: 'NO', onPress: () => { return }, style: 'cancel'},
-  {text: 'YES', onPress: () => removeFromDatabase }])
-    
+  {text: 'YES', onPress: () => removeFromDatabase() }])
   }
 
   const isFocused = useIsFocused();
@@ -38,10 +37,11 @@ function MealDetails({ route, navigation }) {
         headerRight: ({ tintColor }) => (
           <IconButton
             icon="trash-outline"
-            size={28}
+            size={24}
             color={tintColor}
             onPress={() => {
               remove()
+
             }}
           />
         )
