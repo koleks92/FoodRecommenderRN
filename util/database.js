@@ -125,3 +125,30 @@ export function fetchMeals(typeOfMeal) {
     });
   });
 }
+
+export function fetchMeal(id) {
+  return new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql('SELECT * FROM meals WHERE id = ?', [id],
+      (_, result) => {
+        const resultMeal = result.rows._array[0];
+        const meal = new Meal(
+          resultMeal.title,
+          resultMeal.type,
+          resultMeal.imageUri,
+          resultMeal.cusine,
+          resultMeal.restaurant,
+          resultMeal.price,
+          resultMeal.description,
+          resultMeal.recipe,
+          resultMeal.id
+        );
+        resolve(meal);
+      },
+      (_,error) => {
+        reject(error)
+      }
+      );
+    });
+  });
+}
