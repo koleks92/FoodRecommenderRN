@@ -3,11 +3,12 @@
 import { View, Text } from "react-native";
 import Background from "../components/UI/Background";
 
-function MealDetails(id) {
+function MealDetails({ route }) {
+  const mealId = route.params.id;
   return (
     <Background>
       <View>
-        <Text>MealDetails {id}</Text>
+        <Text>MealDetails {route.params.id}</Text>
       </View>
     </Background>
   );

@@ -2,6 +2,8 @@ import { Image, Pressable, StyleSheet, View, Text } from "react-native";
 import { Colors } from "../../constants/colors";
 
 function MealItem({ data, onPress }) {
+  
+
   let image;
 
   if (data.imageUri === "") {
