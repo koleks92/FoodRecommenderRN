@@ -1,6 +1,6 @@
 // Meal Details page
 
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Alert } from "react-native";
 import Background from "../components/UI/Background";
 import { fetchMeal, removeMeal } from "../util/database";
 import { useState, useEffect } from "react";
@@ -15,9 +15,17 @@ function MealDetails({ route, navigation }) {
 
   const [loadedMeal, setLoadedMeal] = useState([]);
 
-  async function remove() {
-    const remove = await removeMeal(mealId);
+  async function removeFromDatabase() {
+    await removeMeal(mealId);
     navigation.navigate("AllMeals");
+  }
+
+  function remove() {
+    Alert.alert('Remove Meal',
+    'Are you sure that you want to remove this meal ?',
+    [{text: 'NO', onPress: () => { return }, style: 'cancel'},
+  {text: 'YES', onPress: () => removeFromDatabase }])
+    
   }
 
   const isFocused = useIsFocused();
