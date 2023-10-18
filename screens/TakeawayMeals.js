@@ -5,6 +5,7 @@ import Background from "../components/UI/Background";
 import { useState, useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import { fetchMeals } from "../util/database";
+import MealList from "../components/Meals/MealList";
 
 function TakeawayMeals() {
   const [loadedMeals, setLoadedMeals] = useState([]);
@@ -23,9 +24,7 @@ function TakeawayMeals() {
 
   return (
     <Background>
-      <View>
-        <Text>Takeaway Meals !</Text>
-      </View>
+      <MealList meals={loadedMeals} />
     </Background>
   );
 }
