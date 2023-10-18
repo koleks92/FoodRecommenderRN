@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary100,
     borderRadius: 6,
     overflow: "hidden",
+    elevation: 4,
   },
   pressed: {
     opacity: 0.75,
