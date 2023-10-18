@@ -16,7 +16,7 @@ function TakeawayForm({ onSaveMeal }) {
   const [selectedImage, setSelectedImage] = useState("");
 
   function imageHandler(image) {
-    setSelectedImage(image);
+    setSelectedImage(image.uri);
   }
 
   function titleHandler(enteredText) {
@@ -55,7 +55,6 @@ function TakeawayForm({ onSaveMeal }) {
       null
     );
 
-    console.log(data.id);
     onSaveMeal(data);
   }
 

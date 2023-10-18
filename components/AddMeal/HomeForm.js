@@ -55,7 +55,6 @@ function HomeForm({ onSaveMeal }) {
       recipeMeal
     );
 
-    console.log(data.id);
     onSaveMeal(data);
   }
 
