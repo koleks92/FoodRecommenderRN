@@ -2,10 +2,12 @@
 
 import { View, Text, StyleSheet, Image } from "react-native";
 import Background from "../components/UI/Background";
-import { fetchMeal } from "../util/database";
+import { fetchMeal, removeMeal } from "../util/database";
 import { useState, useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import { Colors } from "../constants/colors";
+import IconButton from "../components/UI/IconButton";
+
 
 
 function MealDetails({ route, navigation }) {
@@ -13,16 +15,30 @@ function MealDetails({ route, navigation }) {
 
   const [loadedMeal, setLoadedMeal] = useState([]);
 
+  async function remove() {
+    const remove = await removeMeal(mealId);
+    navigation.navigate("AllMeals");
+  }
+
   const isFocused = useIsFocused();
   useEffect(() => {
     async function loadMeal() {
       const meal = await fetchMeal(mealId);
       setLoadedMeal(meal);
       navigation.setOptions({
-        title: meal.title
+        title: meal.title,
+        headerRight: ({ tintColor }) => (
+          <IconButton
+            icon="trash-outline"
+            size={28}
+            color={tintColor}
+            onPress={() => {
+              remove()
+            }}
+          />
+        )
       });
     }
-
     if (isFocused) {
       loadMeal();
     }
