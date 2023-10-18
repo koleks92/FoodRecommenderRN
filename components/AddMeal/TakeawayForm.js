@@ -12,7 +12,7 @@ function TakeawayForm({ onSaveMeal }) {
   const [cusineMeal, setCusineMeal] = useState("");
   const [priceMeal, setPriceMeal] = useState("");
   const [descriptionMeal, setDescriptionMeal] = useState("");
-  const [restuarantMeal, setRestaurantMeal] = useState("");
+  const [restaurantMeal, setRestaurantMeal] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
 
   function imageHandler(image) {
@@ -49,7 +49,7 @@ function TakeawayForm({ onSaveMeal }) {
       "takeaway",
       selectedImage,
       cusineMeal,
-      restuarantMeal,
+      restaurantMeal,
       priceMeal,
       descriptionMeal,
       null
@@ -68,6 +68,8 @@ function TakeawayForm({ onSaveMeal }) {
             style={styles.inputStyle}
             autoCorrect={false}
             onChangeText={titleHandler}
+            value={titleMeal}
+
           />
         </View>
         <View style={styles.dropdownsContainer}>
