@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View, Text } from "react-native";
 import MealItem from "./MealItem";
 
 function MealList({ meals }) {
@@ -24,7 +24,7 @@ function MealList({ meals }) {
         return item.id;
       }}
       renderItem={({ item }) => (
-        <MealItem place={item} onPress={selectMealHandler} />
+        <MealItem data={item} onPress={selectMealHandler} />
       )}
     />
   );
