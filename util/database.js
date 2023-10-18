@@ -78,7 +78,8 @@ export function fetchAllMeals() {
                 meal.restaurant,
                 meal.price,
                 meal.description,
-                meal.recipe
+                meal.recipe,
+                meal.id
               )
             );
           }
@@ -110,7 +111,8 @@ export function fetchMeals(typeOfMeal) {
                 meal.restaurant,
                 meal.price,
                 meal.description,
-                meal.recipe
+                meal.recipe,
+                meal.id
               )
             );
           }
