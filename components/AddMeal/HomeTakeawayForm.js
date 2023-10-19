@@ -30,18 +30,18 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
   }
 
   function titleHandler(enteredText) {
-    setTitleError(false);
     setTitleMeal(enteredText);
+    setTitleError(false);
   }
 
   function cusineHandler(enteredText) {
-    setCusineError(false);
     setCusineMeal(enteredText);
+    setCusineError(false);
   }
 
   function priceHandler(enteredText) {
-    setPriceError(false);
     setPriceMeal(enteredText);
+    setPriceError(false);
   }
 
   function descriptionHandler(enteredText) {
@@ -57,22 +57,19 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
   }
 
   function saveHandler() {
-    if (titleMeal === "") {
+    if (titleMeal == "") {
       setTitleError(true);
+      return;
     }
 
     if (cusineMeal == "") {
       setCusineError(true);
+      return;
     }
 
     if (priceMeal == "") {
       setPriceError(true);
-    }
-    console.log(titleMeal)
-    console.log(titleError);
-
-    if (titleError || cusineError || priceError) {
-        return;
+      return;
     }
 
     if (selectedImage === "") {
@@ -125,7 +122,6 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
             style={styles.inputStyle}
             autoCorrect={false}
             onChangeText={titleHandler}
-            value={titleMeal}
           />
         </View>
         <View style={styles.dropdownsContainer}>
