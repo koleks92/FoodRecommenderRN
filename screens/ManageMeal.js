@@ -12,19 +12,20 @@ function ManageMeal({ navigation, route }) {
   const [meal, setMeal] = useState(null);
 
   // Check if edit meal
-  useEffect(() => {
-    if (route.params.meal) {
+  if (route.params?.type) {
+    useEffect(() => {
       setChoice(route.params.type);
       setMeal(route.params.meal);
-    }
-  }, [route.params.meal, route.params.type]);
+      console.log("Edit")
+    }, [route.params.type]);
+  }
 
   async function editMealHandler(data) {
     navigation.navigate("AllMeals");
   }
 
   async function saveMealHandler(data) {
-    await insertMeal(data);
+    const promise = await insertMeal(data);
     navigation.navigate("AllMeals");
   }
 

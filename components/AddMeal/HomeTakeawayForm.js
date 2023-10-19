@@ -12,9 +12,11 @@ import ImagePicker from "./ImagePicker";
 import { useEffect, useState } from "react";
 import Button from "../UI/Button";
 import { Meal } from "../../models/meal";
+import { useRoute } from "@react-navigation/native";
 
 
-function HomeTakeawayForm({ onSaveMeal, type, id }) {
+ 
+function HomeTakeawayForm({ onSaveMeal, type }) {
   const [titleMeal, setTitleMeal] = useState("");
   const [cusineMeal, setCusineMeal] = useState("");
   const [priceMeal, setPriceMeal] = useState("");
@@ -26,6 +28,16 @@ function HomeTakeawayForm({ onSaveMeal, type, id }) {
   const [cusineError, setCusineError] = useState(false);
   const [priceError, setPriceError] = useState(false);
 
+  const [loadedMeal, setLoadedMeal] = useState(null);
+
+  // Check if Edit
+  const route = useRoute();
+  // Check if meal send through route !
+  if (route.params?.meal) {
+    setLoadedMeal(route.params.meal)
+  }
+
+  // Handlers
   function imageHandler(image) {
     setSelectedImage(image.uri);
   }
@@ -57,6 +69,8 @@ function HomeTakeawayForm({ onSaveMeal, type, id }) {
     setRestaurantMeal(enteredText);
   }
 
+
+  // Save handler + form validation
   function saveHandler() {
     if (titleMeal == "") {
       setTitleError(true);
@@ -77,6 +91,7 @@ function HomeTakeawayForm({ onSaveMeal, type, id }) {
       setSelectedImage(null);
     }
 
+    // Create new Meal object
     const data = new Meal(
       titleMeal,
       type,
@@ -88,9 +103,11 @@ function HomeTakeawayForm({ onSaveMeal, type, id }) {
       recipeMeal
     );
 
+    // Send object
     onSaveMeal(data);
   }
 
+  // Chech if takeaway/homemade meal
   let recipeRestaurantComponent;
 
   if (type === "home") {
@@ -114,6 +131,7 @@ function HomeTakeawayForm({ onSaveMeal, type, id }) {
     );
   }
 
+  // Main view
   return (
     <View style={styles.root}>
       <ScrollView>
