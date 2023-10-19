@@ -8,8 +8,6 @@ import { useIsFocused } from "@react-navigation/native";
 import { Colors } from "../constants/colors";
 import IconButton from "../components/UI/IconButton";
 
-
-
 function MealDetails({ route, navigation }) {
   const mealId = route.params.id;
 
