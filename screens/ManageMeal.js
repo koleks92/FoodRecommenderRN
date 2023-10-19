@@ -7,12 +7,25 @@ import { useState, useEffect } from "react";
 import HomeTakeawayForm from "../components/AddMeal/HomeTakeawayForm";
 import { insertMeal } from "../util/database";
 
-function AddMeals({ navigation }) {
+function ManageMeal({ navigation, route }) {
   const [choice, setChoice] = useState("");
+  const [meal, setMeal] = useState(null);
+
+  // Check if edit meal
+  useEffect(() => {
+    if (route.params.meal) {
+      setChoice(route.params.type);
+      setMeal(route.params.meal);
+    }
+  }, [route.params.meal, route.params.type]);
+
+  async function editMealHandler(data) {
+    navigation.navigate("AllMeals");
+  }
 
   async function saveMealHandler(data) {
     await insertMeal(data);
-    navigation.navigate('AllMeals')
+    navigation.navigate("AllMeals");
   }
 
   function handleChoiceData(data) {
@@ -24,9 +37,24 @@ function AddMeals({ navigation }) {
   if (choice === "") {
     ScreenView = <ChoiceForm handleChoiceData={handleChoiceData} />;
   } else if (choice === "h") {
-    ScreenView = <HomeTakeawayForm onSaveMeal={saveMealHandler} type={'home'}/>;
+    // Home Meal
+    ScreenView = (
+      <HomeTakeawayForm onSaveMeal={saveMealHandler} type={"home"} />
+    );
   } else if (choice === "t") {
-    ScreenView = <HomeTakeawayForm onSaveMeal={saveMealHandler} type={"takeaway"}/>;
+    // TakeawayMeal
+    ScreenView = (
+      <HomeTakeawayForm onSaveMeal={saveMealHandler} type={"takeaway"} />
+    );
+  } else if (choice === "e") {
+    // Edit existing meal
+    ScreenView = (
+      <HomeTakeawayForm
+        onSaveMeal={editMealHandler}
+        type={"edit"}
+        meal={meal}
+      />
+    );
   }
 
   return (
@@ -36,7 +64,7 @@ function AddMeals({ navigation }) {
   );
 }
 
-export default AddMeals;
+export default ManageMeal;
 
 const styles = StyleSheet.create({
   container: {

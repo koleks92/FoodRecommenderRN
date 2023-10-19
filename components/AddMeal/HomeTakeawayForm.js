@@ -13,7 +13,8 @@ import { useEffect, useState } from "react";
 import Button from "../UI/Button";
 import { Meal } from "../../models/meal";
 
-function HomeTakeawayForm({ onSaveMeal, type }) {
+
+function HomeTakeawayForm({ onSaveMeal, type, id }) {
   const [titleMeal, setTitleMeal] = useState("");
   const [cusineMeal, setCusineMeal] = useState("");
   const [priceMeal, setPriceMeal] = useState("");

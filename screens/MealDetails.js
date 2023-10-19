@@ -25,6 +25,10 @@ function MealDetails({ route, navigation }) {
   {text: 'YES', onPress: () => removeFromDatabase() }])
   }
 
+  function edit() {
+    navigation.navigate('ManageMeal', {meal: loadedMeal, type: "e"})
+  }
+
   const isFocused = useIsFocused();
   useEffect(() => {
     async function loadMeal() {
@@ -33,15 +37,26 @@ function MealDetails({ route, navigation }) {
       navigation.setOptions({
         title: loadedMeal.title,
         headerRight: ({ tintColor }) => (
+          <>
+          <IconButton
+            icon="pencil-outline"
+            style={styles.headerButton}
+            size={24}
+            color={tintColor}
+            onPress={() => {
+              edit()
+
+            }}
+          />
           <IconButton
             icon="trash-outline"
             size={24}
             color={tintColor}
             onPress={() => {
               remove()
-
             }}
           />
+          </>
         )
       });
     }
@@ -107,6 +122,11 @@ export default MealDetails;
 const styles = StyleSheet.create({
   root: {
     flex: 1
+  },
+  headerButton: {
+    marginHorizontal: 0,
+    marginVertical: 0,
+
   },
   imageContainer : {
     height: '35%',

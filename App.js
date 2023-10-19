@@ -3,7 +3,7 @@ import { ImageBackground } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import AddMeal from "./screens/AddMeal";
+import ManageMeal from "./screens/ManageMeal";
 import AllMeals from "./screens/AllMeals";
 import HomeMeals from "./screens/HomeMeals";
 import Recommender from "./screens/Recommender";
@@ -36,7 +36,7 @@ function MealsOverview() {
             size={30}
             color={tintColor}
             onPress={() => {
-              navigation.navigate("AddMeal");
+              navigation.navigate("ManageMeal");
             }}
           />
         ),
@@ -127,7 +127,7 @@ export default function App() {
             component={MealsOverview}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="AddMeal" component={AddMeal} />
+          <Stack.Screen name="ManageMeal" component={ManageMeal} />
           <Stack.Screen name="MealDetails" component={MealDetails} />
         </Stack.Navigator>
       </NavigationContainer>
