@@ -1,4 +1,11 @@
-import { ScrollView, StyleSheet, Text, View, TextInput } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Alert,
+} from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import { cusine, price } from "../../constants/meals";
 import { Colors } from "../../constants/colors";
@@ -15,20 +22,26 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
   const [recipeMeal, setRecipeMeal] = useState("");
   const [restaurantMeal, setRestaurantMeal] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
+  const [titleError, setTitleError] = useState(false);
+  const [cusineError, setCusineError] = useState(false);
+  const [priceError, setPriceError] = useState(false);
 
   function imageHandler(image) {
     setSelectedImage(image.uri);
   }
 
   function titleHandler(enteredText) {
+    setTitleError(false);
     setTitleMeal(enteredText);
   }
 
   function cusineHandler(enteredText) {
+    setCusineError(false);
     setCusineMeal(enteredText);
   }
 
   function priceHandler(enteredText) {
+    setPriceError(false);
     setPriceMeal(enteredText);
   }
 
@@ -45,6 +58,22 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
   }
 
   function saveHandler() {
+    if (titleMeal === "") {
+      setTitleError(true);
+    }
+
+    if (cusineMeal === "") {
+      setCusineError(true);
+    }
+
+    if (priceMeal === "") {
+      setPriceError(true);
+    }
+
+    if (titleError || cusineError || priceError) {
+        return;
+    }
+
     if (selectedImage === "") {
       setSelectedImage(null);
     }
@@ -65,34 +94,32 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
 
   let recipeRestaurantComponent;
 
-  if (type === 'home') {
+  if (type === "home") {
     recipeRestaurantComponent = (
-    <>
-    <Text style={styles.labelText}>Recipe</Text>
-    <TextInput
-      style={[styles.inputStyle, styles.multilineStyle]}
-      multiline
-      onChangeText={recipeHandler}
-    />
-    </>)
-  } 
-  if (type === 'takeaway') {
+      <>
+        <Text style={styles.labelText}>Recipe</Text>
+        <TextInput
+          style={[styles.inputStyle, styles.multilineStyle]}
+          multiline
+          onChangeText={recipeHandler}
+        />
+      </>
+    );
+  }
+  if (type === "takeaway") {
     recipeRestaurantComponent = (
-    <>
-    <Text style={styles.labelText}>Restaurant</Text>
-    <TextInput
-      style={styles.inputStyle}
-      onChangeText={restaurantHandler}
-    />
-    </>)
+      <>
+        <Text style={styles.labelText}>Restaurant</Text>
+        <TextInput style={styles.inputStyle} onChangeText={restaurantHandler} />
+      </>
+    );
   }
 
   return (
-
     <View style={styles.root}>
       <ScrollView>
         <View style={styles.inputContainer}>
-          <Text style={styles.labelText}> Title </Text>
+          <Text style={[styles.labelText, titleError ? styles.error : null]}> Title </Text>
           <TextInput
             style={styles.inputStyle}
             autoCorrect={false}
@@ -102,12 +129,15 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
         </View>
         <View style={styles.dropdownsContainer}>
           <View style={styles.dropdownContainer}>
-            <Text style={styles.labelText}>Cusine </Text>
+            <Text style={[styles.labelText, cusineError ? styles.error : null]}>Cusine </Text>
             <SelectDropdown
               data={cusine}
               search="true"
               buttonStyle={styles.buttonDropdown}
-              buttonTextStyle={styles.buttonDropdownTextStyle}
+              buttonTextStyle={[
+                styles.buttonDropdownTextStyle,
+                cusineError ? styles.buttonDropdownTextStyleError : null,
+              ]}
               dropdownStyle={styles.dropdownStyle}
               rowStyle={styles.rowStyle}
               rowTextStyle={styles.rowTextStyle}
@@ -116,7 +146,7 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
             />
           </View>
           <View style={styles.dropdownContainer}>
-            <Text style={styles.labelText}>Price Range</Text>
+            <Text style={[styles.labelText, priceError ? styles.error : null]}>Price Range</Text>
             <SelectDropdown
               data={price}
               buttonStyle={styles.buttonDropdown}
@@ -137,9 +167,7 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
             onChangeText={descriptionHandler}
           />
         </View>
-        <View style={styles.inputContainer}>
-          {recipeRestaurantComponent}
-        </View>
+        <View style={styles.inputContainer}>{recipeRestaurantComponent}</View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Image</Text>
           <ImagePicker onImageTaken={imageHandler} />
@@ -155,7 +183,6 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
         </View>
       </ScrollView>
     </View>
-
   );
 }
 
@@ -211,6 +238,10 @@ const styles = StyleSheet.create({
   buttonDropdownTextStyle: {
     color: Colors.text,
     fontSize: 16,
+  },
+  error: {
+    color: Colors.error,
+    fontWeight: "bold",
   },
   dropdownStyle: {
     position: "absolute",
