@@ -10,5 +10,5 @@ export const Colors = {
     text: '#FFFAFA', // White
     background: '#222222', // Dark gray
     success: '#4CAF50', // Green colors for succress messages
-    error: '#FF0000', // Red color for error messages
+    error: '#da2626', // Red color for error messages
 }
