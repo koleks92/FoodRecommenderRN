@@ -3,16 +3,17 @@ import SelectDropdown from "react-native-select-dropdown";
 import { cusine, price } from "../../constants/meals";
 import { Colors } from "../../constants/colors";
 import ImagePicker from "./ImagePicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../UI/Button";
 import { Meal } from "../../models/meal";
 
-function HomeForm({ onSaveMeal }) {
+function HomeTakeawayForm({ onSaveMeal, type }) {
   const [titleMeal, setTitleMeal] = useState("");
   const [cusineMeal, setCusineMeal] = useState("");
   const [priceMeal, setPriceMeal] = useState("");
   const [descriptionMeal, setDescriptionMeal] = useState("");
   const [recipeMeal, setRecipeMeal] = useState("");
+  const [restaurantMeal, setRestaurantMeal] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
 
   function imageHandler(image) {
@@ -39,6 +40,10 @@ function HomeForm({ onSaveMeal }) {
     setRecipeMeal(enteredText);
   }
 
+  function restaurantHandler(enteredText) {
+    setRestaurantMeal(enteredText);
+  }
+
   function saveHandler() {
     if (selectedImage === "") {
       setSelectedImage(null);
@@ -46,16 +51,40 @@ function HomeForm({ onSaveMeal }) {
 
     const data = new Meal(
       titleMeal,
-      "home",
+      type,
       selectedImage,
       cusineMeal,
-      null,
+      restaurantMeal,
       priceMeal,
       descriptionMeal,
       recipeMeal
     );
 
     onSaveMeal(data);
+  }
+
+  let recipeRestaurantComponent;
+
+  if (type === 'home') {
+    recipeRestaurantComponent = (
+    <>
+    <Text style={styles.labelText}>Recipe</Text>
+    <TextInput
+      style={[styles.inputStyle, styles.multilineStyle]}
+      multiline
+      onChangeText={recipeHandler}
+    />
+    </>)
+  } 
+  if (type === 'takeaway') {
+    recipeRestaurantComponent = (
+    <>
+    <Text style={styles.labelText}>Restaurant</Text>
+    <TextInput
+      style={styles.inputStyle}
+      onChangeText={restaurantHandler}
+    />
+    </>)
   }
 
   return (
@@ -109,12 +138,7 @@ function HomeForm({ onSaveMeal }) {
           />
         </View>
         <View style={styles.inputContainer}>
-          <Text style={styles.labelText}>Recipe</Text>
-          <TextInput
-            style={[styles.inputStyle, styles.multilineStyle]}
-            multiline
-            onChangeText={recipeHandler}
-          />
+          {recipeRestaurantComponent}
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Image</Text>
@@ -135,7 +159,7 @@ function HomeForm({ onSaveMeal }) {
   );
 }
 
-export default HomeForm;
+export default HomeTakeawayForm;
 
 const styles = StyleSheet.create({
   root: {

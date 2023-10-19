@@ -4,8 +4,7 @@ import { StyleSheet, View } from "react-native";
 import ChoiceForm from "../components/AddMeal/ChoiceForm";
 import Background from "../components/UI/Background";
 import { useState, useEffect } from "react";
-import HomeForm from "../components/AddMeal/HomeForm";
-import TakeawayForm from "../components/AddMeal/TakeawayForm";
+import HomeTakeawayForm from "../components/AddMeal/HomeTakeawayForm";
 import { insertMeal } from "../util/database";
 
 function AddMeals({ navigation }) {
@@ -25,9 +24,9 @@ function AddMeals({ navigation }) {
   if (choice === "") {
     ScreenView = <ChoiceForm handleChoiceData={handleChoiceData} />;
   } else if (choice === "h") {
-    ScreenView = <HomeForm onSaveMeal={saveMealHandler} />;
+    ScreenView = <HomeTakeawayForm onSaveMeal={saveMealHandler} type={'home'}/>;
   } else if (choice === "t") {
-    ScreenView = <TakeawayForm onSaveMeal={saveMealHandler} />;
+    ScreenView = <HomeTakeawayForm onSaveMeal={saveMealHandler} type={"takeaway"}/>;
   }
 
   return (
