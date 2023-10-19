@@ -31,7 +31,7 @@ function MealDetails({ route, navigation }) {
       const meal = await fetchMeal(mealId);
       setLoadedMeal(meal);
       navigation.setOptions({
-        title: meal.title,
+        title: loadedMeal.title,
         headerRight: ({ tintColor }) => (
           <IconButton
             icon="trash-outline"
@@ -86,7 +86,9 @@ function MealDetails({ route, navigation }) {
   return (
     <Background>
       <View style={styles.root}>
+        <View style={styles.imageContainer}>
       {image}
+        </View>
       <View style={styles.cusinePriceContainer}>
         <Text style={styles.cpText}>{loadedMeal.cusine}</Text>
         <Text style={styles.cpText}>{loadedMeal.price}</Text>
@@ -106,12 +108,21 @@ const styles = StyleSheet.create({
   root: {
     flex: 1
   },
-  image: {
+  imageContainer : {
     height: '35%',
     minHeight: 250,
     width: "100%",
+    borderBottomColor: 'black',
+    borderBottomWidth: 2
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    borderColor: 'black',
+    borderBottomWidth: 1
   },
   cusinePriceContainer: {
+    marginTop: 8,
     flexDirection: "row",
     justifyContent: "space-evenly"
   },
