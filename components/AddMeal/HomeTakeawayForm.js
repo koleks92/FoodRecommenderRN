@@ -4,7 +4,6 @@ import {
   Text,
   View,
   TextInput,
-  Alert,
 } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import { cusine, price } from "../../constants/meals";
@@ -62,13 +61,15 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
       setTitleError(true);
     }
 
-    if (cusineMeal === "") {
+    if (cusineMeal == "") {
       setCusineError(true);
     }
 
-    if (priceMeal === "") {
+    if (priceMeal == "") {
       setPriceError(true);
     }
+    console.log(titleMeal)
+    console.log(titleError);
 
     if (titleError || cusineError || priceError) {
         return;
