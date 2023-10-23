@@ -173,6 +173,7 @@ export function removeMeal(id) {
 }
 
 export function updateMeal(meal) {
+  console.log(meal.id)
   return new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
@@ -188,10 +189,14 @@ export function updateMeal(meal) {
           meal.id,
         ],
         (_, result) => {
-          resolve(result);
+          if (result.rowsAffected > 0) {
+            resolve("Meal updated successfully");
+          } else {
+            reject("No meal was updated. Meal with the specified ID not found.");
+          }
         },
         (_, error) => {
-          reject(error);
+          reject("Error updating meal: " + error.message);
         }
       );
     });

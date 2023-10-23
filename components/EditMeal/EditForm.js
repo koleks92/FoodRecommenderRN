@@ -19,7 +19,7 @@ function EditForm({ onSaveMeal, meal }) {
   const [cusineError, setCusineError] = useState(false);
   const [priceError, setPriceError] = useState(false);
 
-  console.log(meal)
+  console.log(titleMeal)
 
   useEffect(() => {
     setTitleMeal(meal.title);
@@ -93,7 +93,8 @@ function EditForm({ onSaveMeal, meal }) {
       restaurantMeal,
       priceMeal,
       descriptionMeal,
-      recipeMeal
+      recipeMeal,
+      meal.id
     );
 
     // Send object
