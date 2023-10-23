@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Colors } from "../../constants/colors";
 import Button from "../UI/Button";
 
-function ImagePicker({ onImageTaken }) {
+function ImagePicker({ onImageTaken, loadPicture }) {
   const [cameraPermissionInformation, requestPermission] =
     useCameraPermissions();
   const [cameraPhoto, setCameraPhoto] = useState();
@@ -56,6 +56,12 @@ function ImagePicker({ onImageTaken }) {
   if (cameraPhoto) {
     imagePreview = (
       <Image source={{ uri: cameraPhoto.uri }} style={styles.image} />
+    );
+  }
+
+  if (loadPicture) {
+    imagePreview = (
+      <Image source={{ uri: loadPicture }} style={styles.image} />
     );
   }
 
