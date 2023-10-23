@@ -5,20 +5,19 @@ import ChoiceForm from "../components/AddMeal/ChoiceForm";
 import Background from "../components/UI/Background";
 import { useState, useEffect } from "react";
 import HomeTakeawayForm from "../components/AddMeal/HomeTakeawayForm";
+import EditForm from "../components/EditMeal/EditForm";
 import { insertMeal } from "../util/database";
 
 function ManageMeal({ navigation, route }) {
   const [choice, setChoice] = useState("");
   const [meal, setMeal] = useState(null);
 
-  // Check if edit meal
-  if (route.params?.type) {
-    useEffect(() => {
+  useEffect(() => {
+    if (route.params?.type === "e") {
       setChoice(route.params.type);
-      setMeal(route.params.meal);
-      console.log("Edit")
-    }, [route.params.type]);
-  }
+      setMeal(route.params.loadedMeal)
+    }
+  }, [route.params]);
 
   async function editMealHandler(data) {
     navigation.navigate("AllMeals");
@@ -33,7 +32,7 @@ function ManageMeal({ navigation, route }) {
     setChoice(data);
   }
 
-  let ScreenView;
+  let ScreenView = null;
 
   if (choice === "") {
     ScreenView = <ChoiceForm handleChoiceData={handleChoiceData} />;
@@ -49,13 +48,7 @@ function ManageMeal({ navigation, route }) {
     );
   } else if (choice === "e") {
     // Edit existing meal
-    ScreenView = (
-      <HomeTakeawayForm
-        onSaveMeal={editMealHandler}
-        type={"edit"}
-        meal={meal}
-      />
-    );
+    ScreenView = <EditForm onSaveMeal={editMealHandler} meal={meal} />;
   }
 
   return (

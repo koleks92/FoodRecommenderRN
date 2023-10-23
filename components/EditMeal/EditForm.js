@@ -1,22 +1,13 @@
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, View, TextInput } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import { cusine, price } from "../../constants/meals";
 import { Colors } from "../../constants/colors";
-import ImagePicker from "./ImagePicker";
+import ImagePicker from "../AddMeal/ImagePicker";
 import { useEffect, useState } from "react";
 import Button from "../UI/Button";
 import { Meal } from "../../models/meal";
-import { useRoute } from "@react-navigation/native";
 
-
- 
-function HomeTakeawayForm({ onSaveMeal, type }) {
+function EditForm({ onSaveMeal, meal }) {
   const [titleMeal, setTitleMeal] = useState("");
   const [cusineMeal, setCusineMeal] = useState("");
   const [priceMeal, setPriceMeal] = useState("");
@@ -27,6 +18,18 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
   const [titleError, setTitleError] = useState(false);
   const [cusineError, setCusineError] = useState(false);
   const [priceError, setPriceError] = useState(false);
+
+  console.log(meal)
+
+  useEffect(() => {
+    setTitleMeal(meal.title || "Empty");
+    setCusineMeal(meal.cusine);
+    setPriceMeal(meal.price);
+    setDescriptionMeal(meal.description);
+    setRecipeMeal(meal.recipe);
+    setRestaurantMeal(meal.restaurant);
+    setSelectedImage(meal.imageUri);
+  }, [meal])
 
   // Handlers
   function imageHandler(image) {
@@ -60,7 +63,6 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
     setRestaurantMeal(enteredText);
   }
 
-
   // Save handler + form validation
   function saveHandler() {
     if (titleMeal == "") {
@@ -85,7 +87,7 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
     // Create new Meal object
     const data = new Meal(
       titleMeal,
-      type,
+      meal.type,
       selectedImage,
       cusineMeal,
       restaurantMeal,
@@ -101,7 +103,7 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
   // Chech if takeaway/homemade meal
   let recipeRestaurantComponent;
 
-  if (type === "home") {
+  if (meal.type === "home") {
     recipeRestaurantComponent = (
       <>
         <Text style={styles.labelText}>Recipe</Text>
@@ -109,15 +111,20 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
           style={[styles.inputStyle, styles.multilineStyle]}
           multiline
           onChangeText={recipeHandler}
+          value={recipeMeal}
         />
       </>
     );
   }
-  if (type === "takeaway") {
+  if (meal.type === "takeaway") {
     recipeRestaurantComponent = (
       <>
         <Text style={styles.labelText}>Restaurant</Text>
-        <TextInput style={styles.inputStyle} onChangeText={restaurantHandler} />
+        <TextInput
+          style={styles.inputStyle}
+          onChangeText={restaurantHandler}
+          value={restaurantMeal}
+        />
       </>
     );
   }
@@ -127,16 +134,22 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
     <View style={styles.root}>
       <ScrollView>
         <View style={styles.inputContainer}>
-          <Text style={[styles.labelText, titleError ? styles.error : null]}> Title </Text>
+          <Text style={[styles.labelText, titleError ? styles.error : null]}>
+            {" "}
+            Title{" "}
+          </Text>
           <TextInput
             style={styles.inputStyle}
             autoCorrect={false}
             onChangeText={titleHandler}
+            value={titleMeal}
           />
         </View>
         <View style={styles.dropdownsContainer}>
           <View style={styles.dropdownContainer}>
-            <Text style={[styles.labelText, cusineError ? styles.error : null]}>Cusine </Text>
+            <Text style={[styles.labelText, cusineError ? styles.error : null]}>
+              Cusine{" "}
+            </Text>
             <SelectDropdown
               data={cusine}
               search="true"
@@ -150,10 +163,13 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
               rowTextStyle={styles.rowTextStyle}
               statusBarTranslucent={true}
               onSelect={(selectedItem) => cusineHandler(selectedItem)}
+              defaultValue={cusineMeal}
             />
           </View>
           <View style={styles.dropdownContainer}>
-            <Text style={[styles.labelText, priceError ? styles.error : null]}>Price Range</Text>
+            <Text style={[styles.labelText, priceError ? styles.error : null]}>
+              Price Range
+            </Text>
             <SelectDropdown
               data={price}
               buttonStyle={styles.buttonDropdown}
@@ -163,21 +179,23 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
               rowTextStyle={styles.rowTextStyle}
               statusBarTranslucent={true}
               onSelect={(selectedItem) => priceHandler(selectedItem)}
+              defaultValue={priceMeal}
             />
           </View>
         </View>
         <View style={styles.inputContainer}>
-          <Text style={styles.labelText}>Description </Text>
+          <Text style={styles.labelText}>Description</Text>
           <TextInput
             style={styles.inputStyle}
             multiline
             onChangeText={descriptionHandler}
+            value={descriptionMeal}
           />
         </View>
         <View style={styles.inputContainer}>{recipeRestaurantComponent}</View>
         <View style={styles.inputContainer}>
           <Text style={styles.labelText}>Image</Text>
-          <ImagePicker onImageTaken={imageHandler} />
+          <ImagePicker onImageTaken={imageHandler} loadPicture={selectedImage}/>
         </View>
         <View style={styles.inputContainer}>
           <Button
@@ -193,7 +211,7 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
   );
 }
 
-export default HomeTakeawayForm;
+export default EditForm;
 
 const styles = StyleSheet.create({
   root: {
