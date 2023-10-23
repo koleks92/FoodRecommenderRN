@@ -1,14 +1,13 @@
 // Recommender for food
 
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Background from "../components/UI/Background";
+import RecommenderForm from "../components/Recommender/RecommenderForm";
 
 function Recommender() {
   return (
     <Background>
-      <View>
-        <Text>Recommender</Text>
-      </View>
+      <RecommenderForm />
     </Background>
   );
 }

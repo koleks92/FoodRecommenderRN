@@ -157,7 +157,7 @@ function HomeTakeawayForm({ onSaveMeal, type }) {
             <SelectDropdown
               data={price}
               buttonStyle={styles.buttonDropdown}
-              buttonTextStyle={styles.buttonDropdownTextStyle}
+              buttonTextStyle={[styles.buttonDropdownTextStyle, priceError ? styles.buttonDropdownTextStyleError : null]}
               dropdownStyle={styles.dropdownStyle}
               rowStyle={styles.rowStyle}
               rowTextStyle={styles.rowTextStyle}
