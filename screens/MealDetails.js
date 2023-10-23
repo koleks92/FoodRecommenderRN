@@ -27,9 +27,9 @@ function MealDetails({ route, navigation }) {
     navigation.navigate("AllMeals");
   }
 
-  function remove() {
+  function remove(meal) {
     Alert.alert(
-      `Remove ${loadedMeal.title}`,
+      `Remove ${meal.title}`,
       "Are you sure that you want to remove this meal ?",
       [
         {
@@ -73,7 +73,7 @@ function MealDetails({ route, navigation }) {
                   size={24}
                   color={tintColor}
                   onPress={() => {
-                    remove();
+                    remove(meal);
                   }}
                 />
               </>
