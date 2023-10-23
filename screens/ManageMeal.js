@@ -20,7 +20,6 @@ function ManageMeal({ navigation, route }) {
   }, [route.params]);
 
   async function editMealHandler(data) {
-    console.log(data)
     const promise = await updateMeal(data);
     navigation.navigate("AllMeals");
   }

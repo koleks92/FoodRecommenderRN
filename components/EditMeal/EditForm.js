@@ -19,7 +19,6 @@ function EditForm({ onSaveMeal, meal }) {
   const [cusineError, setCusineError] = useState(false);
   const [priceError, setPriceError] = useState(false);
 
-  console.log(titleMeal)
 
   useEffect(() => {
     setTitleMeal(meal.title);
