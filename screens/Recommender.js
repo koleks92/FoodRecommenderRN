@@ -5,9 +5,13 @@ import Background from "../components/UI/Background";
 import RecommenderForm from "../components/Recommender/RecommenderForm";
 
 function Recommender() {
+  function getOptionsHandler(options) {
+    console.log(options);
+  }
+
   return (
     <Background>
-      <RecommenderForm />
+      <RecommenderForm setSearchOptions={getOptionsHandler}/>
     </Background>
   );
 }

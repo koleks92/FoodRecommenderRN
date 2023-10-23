@@ -12,9 +12,24 @@ import { cusine, price } from "../../constants/meals";
 import Button from "../UI/Button";
 import React, { useState, useEffect, useRef } from "react";
 
-function RecommenderForm() {
+function RecommenderForm({ setSearchOptions }) {
   const [active, setActive] = useState(false);
+  const [takeaway, setTakeaway] = useState(false);
+  const [home, setHome] = useState(true);
+  const [cusineChoice, setCusineChoice] = useState(false);
+  const [priceChoice, setPriceChoice] = useState(false);
+
   let transformX = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (active) {
+      setTakeaway(true);
+      setHome(false);
+    } else {
+      setHome(true);
+      setTakeaway(false);
+    }
+  }, [active]);
 
   useEffect(() => {
     if (active) {
@@ -38,7 +53,21 @@ function RecommenderForm() {
   });
 
   function cusineHandler(cusine) {
-    console.log(cusine);
+    setCusineChoice(cusine);
+  }
+
+  function priceHandler(price) {
+    setPriceChoice(price);
+  }
+
+  function searchHandler() {
+    setSearchOptions([
+      {
+        typeOfMeal: takeaway ? "takeaway" : home,
+        cusineChosen: cusineChoice,
+        priceChosen: priceChoice,
+      },
+    ]);
   }
 
   return (
@@ -101,6 +130,15 @@ function RecommenderForm() {
           onSelect={(selectedItem) => priceHandler(selectedItem)}
         />
       </View>
+      <View style={styles.searchButtonContainer}>
+        <Button
+          onPress={searchHandler}
+          buttonStyle={styles.searchButton}
+          textStyle={styles.searchText}
+        >
+          Recommend !
+        </Button>
+      </View>
     </View>
   );
 }
@@ -121,6 +159,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary100,
     marginHorizontal: 48,
     borderWidth: 1,
+    marginVertical: 12,
   },
   typeOption: {
     flex: 1,
@@ -157,5 +196,23 @@ const styles = StyleSheet.create({
   rowTextStyle: {
     color: Colors.text,
     fontSize: 15,
+  },
+  searchButtonContainer: {
+    height: 48,
+    marginVertical: 12,
+  },
+  searchButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 16,
+    borderWidth: 1,
+    elevation: 4,
+    backgroundColor: Colors.primary300,
+    width: "100%",
+  },
+  searchText: {
+    marginHorizontal: 14,
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
