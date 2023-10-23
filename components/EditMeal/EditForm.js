@@ -22,7 +22,7 @@ function EditForm({ onSaveMeal, meal }) {
   console.log(meal)
 
   useEffect(() => {
-    setTitleMeal(meal.title || "Empty");
+    setTitleMeal(meal.title);
     setCusineMeal(meal.cusine);
     setPriceMeal(meal.price);
     setDescriptionMeal(meal.description);

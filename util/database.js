@@ -158,13 +158,42 @@ export function fetchMeal(id) {
 export function removeMeal(id) {
   return new Promise((resolve, reject) => {
     database.transaction((tx) => {
-      tx.executeSql("DELETE FROM meals WHERE id = ?", [id],
-      (_, result) => {
-        resolve(result)     
-      },
-      (_, error) => {
-        reject(error)
-      });
+      tx.executeSql(
+        "DELETE FROM meals WHERE id = ?",
+        [id],
+        (_, result) => {
+          resolve(result);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+}
+
+export function updateMeal(meal) {
+  return new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        "UPDATE meals SET title = ?, imageUri = ?, cusine = ?, restaurant = ?, price = ?, description = ?, recipe = ? WHERE id = ?",
+        [
+          meal.title,
+          meal.imageUri,
+          meal.cusine,
+          meal.restaurant,
+          meal.price,
+          meal.description,
+          meal.recipe,
+          meal.id,
+        ],
+        (_, result) => {
+          resolve(result);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
     });
   });
 }

@@ -6,7 +6,7 @@ import Background from "../components/UI/Background";
 import { useState, useEffect } from "react";
 import HomeTakeawayForm from "../components/AddMeal/HomeTakeawayForm";
 import EditForm from "../components/EditMeal/EditForm";
-import { insertMeal } from "../util/database";
+import { insertMeal, updateMeal } from "../util/database";
 
 function ManageMeal({ navigation, route }) {
   const [choice, setChoice] = useState("");
@@ -20,6 +20,7 @@ function ManageMeal({ navigation, route }) {
   }, [route.params]);
 
   async function editMealHandler(data) {
+    const promise = await updateMeal(data);
     navigation.navigate("AllMeals");
   }
 
