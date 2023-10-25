@@ -63,7 +63,8 @@ function RecommenderForm({ setSearchOptions }) {
   function searchHandler() {
     setSearchOptions([
       {
-        typeOfMeal: takeaway ? "takeaway" : home,
+        takeaway: takeaway,
+        home: home,
         cusineChosen: cusineChoice,
         priceChosen: priceChoice,
       },
