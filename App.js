@@ -15,6 +15,7 @@ import Icon from "./components/UI/Icon";
 import { useEffect, useState, useCallback } from "react";
 import { init } from "./util/database";
 import * as SplashScreen from "expo-splash-screen";
+import RecommenderResult from "./screens/RecommenderResult";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -130,6 +131,7 @@ export default function App() {
           />
           <Stack.Screen name="ManageMeal" component={ManageMeal} />
           <Stack.Screen name="MealDetails" component={MealDetails} />
+          <Stack.Screen name="RecommenderResult" component={RecommenderResult} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
