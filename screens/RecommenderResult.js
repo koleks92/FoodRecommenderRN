@@ -4,8 +4,9 @@ import Background from "../components/UI/Background";
 import { Colors } from "../constants/colors";
 import Button from "../components/UI/Button";
 
-function RecommenderResult({ route, navigation, recommendAnother }) {
+function RecommenderResult({ route, navigation }) {
   const meal = route.params.meal;
+  const recommendAnother = route.params?.recommendAnother;
 
   let text;
   let item;
@@ -21,8 +22,8 @@ function RecommenderResult({ route, navigation, recommendAnother }) {
     button = (
       <Button
         onPress={recommendAnother}
-        buttonStyle={styles.searchButton}
-        textStyle={styles.searchText}
+        buttonStyle={styles.button}
+        textStyle={styles.buttonText}
       >
         Recommend another !
       </Button>
@@ -38,7 +39,7 @@ function RecommenderResult({ route, navigation, recommendAnother }) {
       <View style={styles.root}>
         <View style={styles.textContainer}>{text}</View>
         {item}
-        <View style={styles.searchButtonContainer}>{button}</View>
+        <View style={styles.buttonContainer}>{button}</View>
       </View>
     </Background>
   );
@@ -60,21 +61,21 @@ const styles = StyleSheet.create({
     fontSize: 26,
     textAlign: "center",
   },
-  searchButtonContainer: {
+  buttonContainer: {
     width: "75%",
     height: 48,
     marginVertical: 24,
   },
-  searchButton: {
+  button: {
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 4,
+    borderRadius: 6,
     borderWidth: 1,
     elevation: 4,
     backgroundColor: Colors.primary300,
     width: "100%",
   },
-  searchText: {
+  buttonText: {
     marginHorizontal: 14,
     fontSize: 20,
     fontWeight: "bold",

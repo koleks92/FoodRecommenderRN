@@ -5,9 +5,13 @@ import Background from "../components/UI/Background";
 import RecommenderForm from "../components/Recommender/RecommenderForm";
 import { useLayoutEffect, useState } from "react";
 import { fetchAllMeals } from "../util/database";
+import RecommenderResult from "./RecommenderResult";
 
 function Recommender({ navigation }) {
   const [allMeals, SetAllMeals] = useState();
+
+  // Search options saved for future recommendations
+  let researchOptions;
 
   // Load meals using async fetchMeals
   useLayoutEffect(() => {
@@ -16,8 +20,7 @@ function Recommender({ navigation }) {
       SetAllMeals(meals);
     }
     loadMeals();
-  }, [])
-
+  }, []);
 
   // Calculate random meal from array
   function oneMealRandom(meals) {
@@ -50,19 +53,22 @@ function Recommender({ navigation }) {
     if (filteredMeals.length > 0) {
       return oneMealRandom(filteredMeals);
     } else {
-      return "noMeal"
+      return "noMeal";
     }
   }
 
   function getRecommendationHandler(searchOptions) {
+    // Set researchOptions for future recommendations
+    researchOptions = searchOptions
+
     // Set type of meal (home or takeaway)
     let filteredMeals;
     if (searchOptions[0].home) {
       filteredMeals = allMeals.filter((meal) => meal.type === "home");
     } else {
-      filteredMeals = allMeals.filter((meal) => meal.type === "takeaway");   
+      filteredMeals = allMeals.filter((meal) => meal.type === "takeaway");
     }
-    
+
     // Get recommended meal
     const meal = mealRecommender(
       filteredMeals,
@@ -71,7 +77,14 @@ function Recommender({ navigation }) {
     );
 
     // Load results screen
-    navigation.navigate("RecommenderResult", { meal: meal });
+    navigation.navigate("RecommenderResult", {
+      meal: meal,
+      recommendAnother: recommendAnotherHandler,
+    });
+  }
+
+  function recommendAnotherHandler() {
+    getRecommendationHandler(researchOptions);
   }
 
   return (
