@@ -63,16 +63,15 @@ function Recommender({ navigation }) {
       filteredMeals = allMeals.filter((meal) => meal.type === "takeaway");   
     }
     
-    let meal = mealRecommender(
+    // Get recommended meal
+    const meal = mealRecommender(
       filteredMeals,
       searchOptions[0].cusineChosen,
       searchOptions[0].priceChosen
     );
 
-    console.log(meal);
-
     // Load results screen
-    navigation.navigate("RecommenderResult");
+    navigation.navigate("RecommenderResult", { meal: meal });
   }
 
   return (

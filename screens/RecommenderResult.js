@@ -1,9 +1,11 @@
 import { View, Text, StyleSheet } from "react-native";
+import RecommendedItem from "../components/Recommender/RecommendedItem";
 
-function RecommenderResult({ meal }) {
+function RecommenderResult({ route }) {
+    const meal = route.params.meal; 
     return (
         <View>
-            <Text> Result</Text>
+            <RecommendedItem meal = {meal}/>
         </View>
     )
 }
