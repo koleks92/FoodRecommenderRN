@@ -50,7 +50,7 @@ function Recommender({ navigation }) {
     if (filteredMeals.length > 0) {
       return oneMealRandom(filteredMeals);
     } else {
-      console.log("No meal found")
+      return "noMeal"
     }
   }
 
