@@ -3,10 +3,11 @@ import RecommendedItem from "../components/Recommender/RecommendedItem";
 import Background from "../components/UI/Background";
 import { Colors } from "../constants/colors";
 import Button from "../components/UI/Button";
+import { useRecommendation } from "../store/context";
 
 function RecommenderResult({ route, navigation }) {
   const meal = route.params.meal;
-  const recommendAnother = route.params?.recommendAnother;
+  const recommendAnother = useRecommendation();
 
   let text;
   let item;

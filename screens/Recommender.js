@@ -1,11 +1,12 @@
 // Recommender for food
 
-import { View, Text, StyleSheet } from "react-native";
 import Background from "../components/UI/Background";
 import RecommenderForm from "../components/Recommender/RecommenderForm";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { fetchAllMeals } from "../util/database";
-import RecommenderResult from "./RecommenderResult";
+import { useRecommendation } from "../store/context";
+
+
 
 function Recommender({ navigation }) {
   const [allMeals, SetAllMeals] = useState();
@@ -83,9 +84,10 @@ function Recommender({ navigation }) {
     });
   }
 
-  function recommendAnotherHandler() {
-    getRecommendationHandler(researchOptions);
-  }
+  const recommendAnotherHandler = useRecommendation();
+  const result = recommendAnotherHandler;
+
+  console.log(result)
 
   return (
     <Background>

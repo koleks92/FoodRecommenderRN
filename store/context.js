@@ -8,7 +8,7 @@ export const useRecommendation = () => {
 
 export const RecommendationProvider = ({ children }) => {
   const recommendAnotherHandler = () => {
-    console.log("Reeeeee")
+    return true
   };
 
   return (
