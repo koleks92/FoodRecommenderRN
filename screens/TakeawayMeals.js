@@ -10,6 +10,7 @@ import MealList from "../components/Meals/MealList";
 function TakeawayMeals() {
   const [loadedMeals, setLoadedMeals] = useState([]);
 
+  // Load meals using async fetchMeals
   const isFocused = useIsFocused();
   useEffect(() => {
     async function loadTakeawayMeals() {

@@ -12,6 +12,7 @@ function ManageMeal({ navigation, route }) {
   const [choice, setChoice] = useState("");
   const [meal, setMeal] = useState(null);
 
+  // Check if "edit"
   useEffect(() => {
     if (route.params?.type === "e") {
       setChoice(route.params.type);
@@ -19,16 +20,19 @@ function ManageMeal({ navigation, route }) {
     }
   }, [route.params]);
 
+  // Edit function handler
   async function editMealHandler(data) {
     const promise = await updateMeal(data);
     navigation.navigate("AllMeals");
   }
 
+  // Add new meal handler
   async function saveMealHandler(data) {
     const promise = await insertMeal(data);
     navigation.navigate("AllMeals");
   }
 
+  // Set type "h" = home, "t" = takeaway, "e" = edit
   function handleChoiceData(data) {
     setChoice(data);
   }

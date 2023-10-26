@@ -22,11 +22,13 @@ function MealDetails({ route, navigation }) {
   const [loadedMeal, setLoadedMeal] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Add loading state
 
+  // Remove function
   async function removeFromDatabase() {
     await removeMeal(mealId);
     navigation.navigate("AllMeals");
   }
 
+  // Remove button handler
   function remove(meal) {
     Alert.alert(
       `Remove ${meal.title}`,
@@ -44,10 +46,12 @@ function MealDetails({ route, navigation }) {
     );
   }
 
+  // Edit button handler
   function edit(meal) {
     navigation.navigate("ManageMeal", { loadedMeal: meal, type: "e" });
   }
 
+  // If focused again, reload meal
   const isFocused = useIsFocused();
   useEffect(() => {
     async function loadMeal() {
@@ -90,6 +94,7 @@ function MealDetails({ route, navigation }) {
     }
   }, [isFocused]);
 
+  // Set image if avaliable
   let image;
   if (loadedMeal.imageUri === "") {
     image = (
@@ -104,6 +109,7 @@ function MealDetails({ route, navigation }) {
     );
   }
 
+  // Set description if avaliable
   let description;
   if (loadedMeal.description || loadedMeal.description !== "") {
     description = (
@@ -113,6 +119,7 @@ function MealDetails({ route, navigation }) {
     );
   }
 
+  // Set recipe if avaliable
   let recipe;
   if (loadedMeal.recipe || loadedMeal.recipe !== "") {
     recipe = (
@@ -122,6 +129,7 @@ function MealDetails({ route, navigation }) {
     );
   }
 
+  // Set restaurant if avaliable
   let restaurant;
   if (loadedMeal.restaurant || loadedMeal.restaurant !== "") {
     restaurant = (
@@ -158,10 +166,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   loadingText: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     fontSize: 32,
-    color: Colors.text
+    color: Colors.text,
   },
   headerButton: {
     marginHorizontal: 0,

@@ -1,6 +1,5 @@
 // Shows all avalilable meals
 
-import { View, Text } from "react-native";
 import Background from "../components/UI/Background";
 import { useIsFocused } from "@react-navigation/native";
 import { fetchAllMeals } from "../util/database";
@@ -10,6 +9,7 @@ import MealList from "../components/Meals/MealList";
 function AllMeals() {
   const [loadedMeals, setLoadedMeals] = useState([]);
 
+  // Load meals using async fetchMeals
   const isFocused = useIsFocused();
   useEffect(() => {
     async function loadAllMeals() {

@@ -13,6 +13,7 @@ function RecommenderResult({ route, navigation }) {
   const [allMeals, setAllMeals] = useState(route.params.allMeals);
   const [meal, setMeal] = useState(route.params.meal);
 
+  // Variables for text, meal, and recommend another button
   let text = <Text style={styles.text}>Your recommendation</Text>;
   let item = <RecommendedItem meal={meal} onPress={onPressHandler} />;
   let button = (
@@ -25,13 +26,17 @@ function RecommenderResult({ route, navigation }) {
     </Button>
   );
 
+  // Recommend another function
   function recommendAnotherHandler() {
+    // Remove current meal from allMeals array
     const newAllMeals = removeMealFromAllMeals(allMeals, meal);
     setAllMeals(newAllMeals);
+    // Recommend new meal
     const newMeal = getRecommendation(allMeals, searchOptions);
     setMeal(newMeal);
   }
 
+  // If no meals in array
   if (meal === "noMeal") {
     text = (
       <Text style={styles.text}>No recommendations match your criteria :(</Text>
@@ -40,6 +45,7 @@ function RecommenderResult({ route, navigation }) {
     button = "";
   }
 
+  // Navigate to mealDetails
   function onPressHandler(id) {
     navigation.navigate("MealDetails", { id: id });
   }
