@@ -1,6 +1,5 @@
 // Shows all make-at-home meals
 
-import { View, Text } from "react-native";
 import Background from "../components/UI/Background";
 import { useState, useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
