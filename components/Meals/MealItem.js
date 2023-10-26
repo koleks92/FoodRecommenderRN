@@ -1,9 +1,10 @@
 import { Image, Pressable, StyleSheet, View, Text } from "react-native";
 import { Colors } from "../../constants/colors";
 
-function MealItem({ data, onPress }) {
-  
+import { useNavigation } from "@react-navigation/native";
 
+function MealItem({ data }) {
+  const navigation = useNavigation();
   let image;
 
   if (data.imageUri === "") {
@@ -26,7 +27,7 @@ function MealItem({ data, onPress }) {
 
   return (
     <Pressable
-      onPress={onPress.bind(this, data.id)}
+      onPress={() => navigation.navigate("MealDetails", { id: data.id })}
       style={({ pressed }) => [styles.item, pressed && styles.pressed]}
     >
       {image}
@@ -68,8 +69,8 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   titleTypeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   title: {
     fontSize: 20,
