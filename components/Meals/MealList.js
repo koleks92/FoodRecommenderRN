@@ -1,6 +1,7 @@
 import { FlatList, StyleSheet, View, Text } from "react-native";
 import MealItem from "./MealItem";
 import { useNavigation } from "@react-navigation/native";
+import { Colors } from "../../constants/colors";
 
 function MealList({ meals }) {
   const navigation = useNavigation();
@@ -13,6 +14,8 @@ function MealList({ meals }) {
     return (
       <View style={styles.fallbackContainer}>
         <Text style={styles.fallbackText}>No meals added yet :(</Text>
+        <Text style={styles.fallbackText}>Add some now :)</Text>
+
       </View>
     );
   }
@@ -38,6 +41,14 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 8,
   },
-  fallbackContainer: {},
-  fallbackText: {},
+  fallbackContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  fallbackText: {
+    marginVertical: 12,
+    color: Colors.text,
+    fontSize: 24
+  },
 });
