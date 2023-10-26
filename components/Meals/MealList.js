@@ -15,7 +15,6 @@ function MealList({ meals }) {
       <View style={styles.fallbackContainer}>
         <Text style={styles.fallbackText}>No meals added yet :(</Text>
         <Text style={styles.fallbackText}>Add some now :)</Text>
-
       </View>
     );
   }
