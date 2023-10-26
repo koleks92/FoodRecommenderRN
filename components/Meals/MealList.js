@@ -4,11 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Colors } from "../../constants/colors";
 
 function MealList({ meals }) {
-  const navigation = useNavigation();
 
-  function selectMealHandler(id) {
-    navigation.navigate("MealDetails", { id: id });
-  }
 
   if (!meals || meals.length === 0) {
     return (
@@ -27,7 +23,7 @@ function MealList({ meals }) {
         return item.id;
       }}
       renderItem={({ item }) => (
-        <MealItem data={item} onPress={selectMealHandler} />
+        <MealItem data={item}/>
       )}
     />
   );
