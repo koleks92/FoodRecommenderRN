@@ -16,7 +16,6 @@ import { useEffect, useState, useCallback } from "react";
 import { init } from "./util/database";
 import * as SplashScreen from "expo-splash-screen";
 import RecommenderResult from "./screens/RecommenderResult";
-import { RecommendationProvider } from "./store/context";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -117,7 +116,7 @@ export default function App() {
   }
 
   return (
-    <RecommendationProvider>
+    <>
       <StatusBar style="auto" />
       <NavigationContainer onReady={onLayoutRootView}>
         <Stack.Navigator
@@ -135,6 +134,6 @@ export default function App() {
           <Stack.Screen name="RecommenderResult" component={RecommenderResult} />
         </Stack.Navigator>
       </NavigationContainer>
-    </RecommendationProvider>
+    </>
   );
 }
