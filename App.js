@@ -20,7 +20,6 @@ import RecommenderResult from "./screens/RecommenderResult";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-
 function MealsOverview() {
   return (
     <Tab.Navigator
@@ -42,6 +41,7 @@ function MealsOverview() {
             }}
           />
         ),
+        headerTitleAlign: "center",
       })}
     >
       <Tab.Screen
@@ -52,6 +52,7 @@ function MealsOverview() {
             <Icon icon="dice-6" size={30} color={Colors.icons} set="m" />
           ),
           cardStyle: { backgroundColor: "#111111" },
+          title: "Recommender",
         }}
       />
       <Tab.Screen
@@ -62,6 +63,7 @@ function MealsOverview() {
           tabBarIcon: () => (
             <Icon icon="fast-food" size={30} color={Colors.icons} set="i" />
           ),
+          title: "All Meals",
         }}
       />
       <Tab.Screen
@@ -71,6 +73,7 @@ function MealsOverview() {
           tabBarIcon: () => (
             <Icon icon="knife" size={30} color={Colors.icons} />
           ),
+          title: "Make at home",
         }}
       />
       <Tab.Screen
@@ -80,6 +83,7 @@ function MealsOverview() {
           tabBarIcon: () => (
             <Icon icon="truck-delivery" size={30} color={Colors.icons} />
           ),
+          title: "Takeaway",
         }}
       />
     </Tab.Navigator>
@@ -129,9 +133,24 @@ export default function App() {
             component={MealsOverview}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="ManageMeal" component={ManageMeal} />
+          <Stack.Screen
+            name="ManageMeal"
+            component={ManageMeal}
+            options={({ route }) => {
+              const type = route.params?.type || "h"; // Default to 'h' if type is not provided
+              const headerTitle = type === "e" ? "Edit Meal" : "Add New Meal"; // Change header title for type 'e'
+
+              return {
+                title: headerTitle,
+              };
+            }}
+          />
           <Stack.Screen name="MealDetails" component={MealDetails} />
-          <Stack.Screen name="RecommenderResult" component={RecommenderResult} />
+          <Stack.Screen
+            name="RecommenderResult"
+            component={RecommenderResult}
+            options={{ title: "" }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
