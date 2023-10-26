@@ -3,15 +3,15 @@ import RecommendedItem from "../components/Recommender/RecommendedItem";
 import Background from "../components/UI/Background";
 import { Colors } from "../constants/colors";
 import Button from "../components/UI/Button";
-import { getRecommendation } from "../util/recommenderFunctions";
+import { getRecommendation, removeMealFromAllMeals } from "../util/recommenderFunctions";
 import { useEffect, useState } from "react";
 
 function RecommenderResult({ route, navigation }) {
   const searchOptions = route.params.searchOptions;
-  const allMeals = route.params.allMeals;
-  
-   // Use useState to manage the meal state
-   const [meal, setMeal] = useState(route.params.meal);
+
+  // Use useState to manage the meal and allMeals state
+  const [allMeals, setAllMeals] = useState(route.params.allMeals);
+  const [meal, setMeal] = useState(route.params.meal);
 
   let text = <Text style={styles.text}>Your recommendation</Text>;
   let item = <RecommendedItem meal={meal} onPress={onPressHandler} />;
@@ -26,22 +26,19 @@ function RecommenderResult({ route, navigation }) {
   );
 
   function recommendAnotherHandler() {
+    const newAllMeals = removeMealFromAllMeals(allMeals, meal);
+    setAllMeals(newAllMeals);
     const newMeal = getRecommendation(allMeals, searchOptions);
     setMeal(newMeal);
   }
-
-  useEffect(() => {
-    console.log(meal)
-    item = <RecommendedItem meal={meal} onPress={onPressHandler} />;
-  }, [meal])
 
   if (meal === "noMeal") {
     text = (
       <Text style={styles.text}>No recommendations match your criteria :(</Text>
     );
-    item = '';
-    button = '';
-  } 
+    item = "";
+    button = "";
+  }
 
   function onPressHandler(id) {
     navigation.navigate("MealDetails", { id: id });
