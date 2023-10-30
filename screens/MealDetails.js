@@ -1,6 +1,6 @@
 // Meal Details page
 
-import { View, Text, StyleSheet, Image, Alert } from "react-native";
+import { View, Text, StyleSheet, Image, Alert, ScrollView } from "react-native";
 import Background from "../components/UI/Background";
 import { fetchMeal, removeMeal } from "../util/database";
 import { useState, useEffect } from "react";
@@ -144,7 +144,7 @@ function MealDetails({ route, navigation }) {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <View style={styles.root}>
+        <ScrollView style={styles.root}>
           <View style={styles.imageContainer}>{image}</View>
           <View style={styles.cusinePriceContainer}>
             <Text style={styles.cpText}>{loadedMeal.cusine}</Text>
@@ -153,7 +153,7 @@ function MealDetails({ route, navigation }) {
           {description}
           {recipe}
           {restaurant}
-        </View>
+        </ScrollView>
       )}
     </Background>
   );
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     marginVertical: 0,
   },
   imageContainer: {
-    height: "35%",
+    maxHeight: "35%",
     minHeight: 250,
     width: "100%",
     borderBottomColor: "black",
