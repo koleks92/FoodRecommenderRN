@@ -18,11 +18,16 @@
       "supportsTablet": true
     },
     "android": {
-      "permissions": ["CAMERA", "READ_EXTERNAL_STORAGE"],
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#111111"
       },
+      "package": "com.koleks92.FoodRecommenderRN"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -35,7 +40,11 @@
           "cameraPermission": "Allow the app to access your camera"
         }
       ]
-    ]
-    
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b90aa34e-d0f0-4643-938e-a00a57fc0527"
+      }
+    }
   }
 }
